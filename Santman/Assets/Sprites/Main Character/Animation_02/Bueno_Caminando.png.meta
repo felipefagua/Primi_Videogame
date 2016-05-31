@@ -1,0 +1,221 @@
+fileFormatVersion: 2
+guid: 0dedcdcc1fe8a684cb2792883eef6568
+timeCreated: 1460412185
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Bueno_Caminando_0
+    21300002: Bueno_Caminando_1
+    21300004: Bueno_Caminando_2
+    21300006: Bueno_Caminando_3
+    21300008: Bueno_Caminando_4
+    21300010: Bueno_Caminando_5
+    21300012: Bueno_Caminando_6
+    21300014: Bueno_Caminando_7
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Bueno_Caminando_0
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 768
+        width: 112
+        height: 216
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -36, y: 216}
+        - {x: -56, y: 122}
+        - {x: -56, y: 30}
+        - {x: -39, y: 0}
+        - {x: 56, y: 0}
+        - {x: 56, y: 214}
+        - {x: 53, y: 216}
+    - name: Bueno_Caminando_1
+      rect:
+        serializedVersion: 2
+        x: 331
+        y: 768
+        width: 109
+        height: 208
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -27.5, y: 208}
+        - {x: -54.5, y: 187}
+        - {x: -54.5, y: 0}
+        - {x: 37.5, y: 0}
+        - {x: 54.5, y: 29}
+        - {x: 54.5, y: 208}
+    - name: Bueno_Caminando_2
+      rect:
+        serializedVersion: 2
+        x: 582
+        y: 768
+        width: 112
+        height: 212
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -27, y: 212}
+        - {x: -54, y: 170}
+        - {x: -54, y: 0}
+        - {x: 17, y: 0}
+        - {x: 56, y: 41}
+        - {x: 56, y: 212}
+    - name: Bueno_Caminando_3
+      rect:
+        serializedVersion: 2
+        x: 843
+        y: 768
+        width: 109
+        height: 220
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 48.5, y: 220}
+        - {x: -27.5, y: 220}
+        - {x: -34.5, y: 218}
+        - {x: -54.5, y: 121}
+        - {x: -54.5, y: 55}
+        - {x: -17.5, y: 0}
+        - {x: 33.5, y: 0}
+        - {x: 54.5, y: 42}
+        - {x: 54.5, y: 214}
+    - name: Bueno_Caminando_4
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 512
+        width: 112
+        height: 221
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -17, y: 221}
+        - {x: -38, y: 214}
+        - {x: -56, y: 156}
+        - {x: -56, y: 37}
+        - {x: -48, y: 0}
+        - {x: 35, y: 0}
+        - {x: 56, y: 30}
+        - {x: 56, y: 214}
+        - {x: 53, y: 221}
+    - name: Bueno_Caminando_5
+      rect:
+        serializedVersion: 2
+        x: 308
+        y: 512
+        width: 152
+        height: 208
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 44, y: 206}
+        - {x: 32, y: 208}
+        - {x: -7, y: 208}
+        - {x: -22, y: 198}
+        - {x: -76, y: 72}
+        - {x: -76, y: 40}
+        - {x: -75, y: 33}
+        - {x: -63, y: 36}
+        - {x: -57, y: 42}
+        - {x: -45, y: 0}
+        - {x: 58, y: 0}
+        - {x: 76, y: 7}
+        - {x: 76, y: 119}
+        - {x: 63, y: 180}
+    - name: Bueno_Caminando_6
+      rect:
+        serializedVersion: 2
+        x: 584
+        y: 512
+        width: 112
+        height: 212
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -38, y: 212}
+        - {x: -56, y: 128}
+        - {x: -56, y: 11}
+        - {x: -52, y: 5}
+        - {x: -34, y: 0}
+        - {x: 23, y: 0}
+        - {x: 56, y: 16}
+        - {x: 56, y: 197}
+        - {x: 44, y: 212}
+    - name: Bueno_Caminando_7
+      rect:
+        serializedVersion: 2
+        x: 843
+        y: 512
+        width: 109
+        height: 221
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -12.5, y: 221}
+        - {x: -45.5, y: 202}
+        - {x: -54.5, y: 186}
+        - {x: -54.5, y: 47}
+        - {x: -35.5, y: 0}
+        - {x: 38.5, y: 0}
+        - {x: 54.5, y: 28}
+        - {x: 54.5, y: 221}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
