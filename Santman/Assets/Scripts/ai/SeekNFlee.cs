@@ -1,8 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using System.Collections;
-using System.Linq;
-using UnityEditor;
 
 public class SeekNFlee : MonoBehaviour {
 
