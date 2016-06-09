@@ -26,6 +26,7 @@ public class PauseManager : BaseMenuController {
             base.Update();
 
 	    CheckPauseInput();
+		CheckPausePS4Input();
 	}
 
     protected override void SelectOption(int option) {
@@ -43,6 +44,11 @@ public class PauseManager : BaseMenuController {
         if (Input.GetKeyDown(_pauseKeyCode))
             TogglePause();
     }
+
+	private void CheckPausePS4Input() {
+		if (Input.GetButtonDown("Submit"))
+			TogglePause();
+	}
 
     private void TogglePause() {
         if (_gameIsPaused)

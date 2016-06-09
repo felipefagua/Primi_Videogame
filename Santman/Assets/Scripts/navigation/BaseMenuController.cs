@@ -25,11 +25,16 @@ public abstract class BaseMenuController : MonoBehaviour {
 
     protected virtual void Update() {
         CheckInput();
-        CheckPS3Input();
+        CheckPS4Input();
     }
 
-    private void CheckPS3Input() {
-        
+    private void CheckPS4Input() {
+		if (Input.GetAxis("Vertical") < -0.5)
+			GotoOption(1);
+		else if (Input.GetAxis("Vertical") > 0.5f)
+			GotoOption(-1);
+		else if (Input.GetButtonDown("Jump"))
+			SelectOption(_currentOption);
     }
 
     private void CheckInput() {

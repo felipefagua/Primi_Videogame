@@ -34,7 +34,29 @@ public class MovementController : MonoBehaviour {
     }
 
     private void Update () {
-        CheckInput();	
+		CheckInput ();
+		CheckPS4Input ();
+	}
+
+	void CheckPS4Input () {
+		CheckMovementPS4Input ();
+		CheckAttackPS4Input ();
+	}
+
+	void CheckMovementPS4Input () {
+		float xInput = Input.GetAxis("Horizontal");
+		float yInput = Input.GetAxis("Vertical");
+		Vector3 movementVector = new Vector3(xInput, yInput);
+		if (movementVector.magnitude < 0.3f)
+			movementVector = new Vector3 ();
+
+		TryToMoveCharacter (movementVector);
+	}
+
+	void CheckAttackPS4Input () {
+		if (Input.GetButtonDown("Fire1") && 
+			AttackAction != null)
+			AttackAction();
 	}
 
     private void CheckInput() {
@@ -54,31 +76,36 @@ public class MovementController : MonoBehaviour {
         if (Input.GetKey(_moveRightKey))
             movementVector += new Vector3(1, 0);
 
-        Vector3 step = movementVector.normalized * _movementSpeed * Time.deltaTime;
-        Vector3 candidatePosition = _myTransform.position + step;
-
-        RaycastHit2D[] hits = Physics2D.RaycastAll(_myTransform.position, step, _collideDistance);
-
-        if (!HitAnObstacle(hits)) {
-            _myTransform.position = candidatePosition;
-            if (movementVector.magnitude > 0) {
-                GetComponent<Animator>().SetBool("isWalking", true);
-                if (movementVector.x < 0) {
-                    Vector3 newScale = _myTransform.localScale;
-                    newScale.x = Mathf.Abs(newScale.x) * -1;
-                    _myTransform.localScale = newScale;
-                }
-                else {
-                    Vector3 newScale = _myTransform.localScale;
-                    newScale.x = Mathf.Abs(newScale.x);
-                    _myTransform.localScale = newScale;
-                }
-            }
-            else
-                GetComponent<Animator>().SetBool("isWalking", false);
-
-        }
+		TryToMoveCharacter (movementVector);
+        
     }
+
+	private void TryToMoveCharacter (Vector3 movementVector) {
+		Vector3 step = movementVector.normalized * _movementSpeed * Time.deltaTime;
+		Vector3 candidatePosition = _myTransform.position + step;
+
+		RaycastHit2D[] hits = Physics2D.RaycastAll(_myTransform.position, step, _collideDistance);
+
+		if (!HitAnObstacle(hits)) {
+			_myTransform.position = candidatePosition;
+			if (movementVector.magnitude > 0) {
+				GetComponent<Animator>().SetBool("isWalking", true);
+				if (movementVector.x < 0) {
+					Vector3 newScale = _myTransform.localScale;
+					newScale.x = Mathf.Abs(newScale.x) * -1;
+					_myTransform.localScale = newScale;
+				}
+				else {
+					Vector3 newScale = _myTransform.localScale;
+					newScale.x = Mathf.Abs(newScale.x);
+					_myTransform.localScale = newScale;
+				}
+			}
+			else
+				GetComponent<Animator>().SetBool("isWalking", false);
+
+		}		
+	}
 
     private bool HitAnObstacle(RaycastHit2D[] hits) {
         foreach(RaycastHit2D hit in hits) {

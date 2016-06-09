@@ -10,6 +10,11 @@ public class CreditsMenuController : MonoBehaviour {
     [SerializeField]
     private string _mainMenuSceneSceneName;
 
+	private void Update() {
+		if (Input.GetButtonDown ("Cancel"))
+			GotoMainMenuScene ();
+	}
+
     public void GotoMainMenuScene() {
         Invoke("LoadMainMenuScene", _delay);
     }
