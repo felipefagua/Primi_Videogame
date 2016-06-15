@@ -10,6 +10,10 @@ public class PauseManager : BaseMenuController {
     [SerializeField]
     private bool _gameIsPaused;
 
+	public bool GameIsPaused{
+		get { return _gameIsPaused; }
+	}
+
     [SerializeField]
     private GameObject _pausePanel;
 

@@ -40,8 +40,18 @@ public class MovementController : MonoBehaviour {
     }
 
     private void Update () {
-		CheckInput ();
-		//CheckPS4Input ();
+		if (!GameIsPaused ()) {
+			CheckInput ();
+			CheckPS4Input ();
+		}
+	}
+
+	private bool GameIsPaused(){
+		PauseManager pauseManager = FindObjectOfType<PauseManager>();
+		if (pauseManager == null)
+			return false;
+
+		return pauseManager.GameIsPaused;
 	}
 
 	void CheckPS4Input () {
@@ -56,7 +66,10 @@ public class MovementController : MonoBehaviour {
 		if (movementVector.magnitude < 0.3f)
 			movementVector = new Vector3 ();
 
-		TryToMoveCharacter (movementVector);
+		if (Input.GetButtonDown("Jump"))
+			TryToJump();
+
+		MoveCharacter(movementVector);
 	}
 
 	void CheckAttackPS4Input () {
@@ -84,17 +97,20 @@ public class MovementController : MonoBehaviour {
         if (Input.GetKey(_jumpKey))
             TryToJump();
 
-        if (_jumpController.IsJumping) {
-            movementVector.y = _jumpController.JumpVector.y;
-            MoveCharacterDuringJump(movementVector);
-        }
-        else
-            TryToMoveCharacter(movementVector);
+		MoveCharacter (movementVector);
 
     }
 
-    private void MoveCharacterDuringJump(Vector3 movementVector) {
-        Vector3 jumpStep = movementVector * _movementSpeed * Time.deltaTime;
+	void MoveCharacter (Vector3 movementVector) {
+		if (_jumpController.IsJumping) 
+			MoveCharacterWhileJumping (movementVector);
+		else
+			TryToMoveCharacter(movementVector);
+	}
+
+	private void MoveCharacterWhileJumping(Vector3 movementVector) {
+		movementVector.y = _jumpController.JumpVector.y;
+		Vector3 jumpStep = movementVector * _movementSpeed * Time.deltaTime;
         _myTransform.position += jumpStep;
         if (_jumpController.IsJumping && _jumpController.IsGoingUp &&
             _myTransform.position.y < _jumpController.StartJumpPosition.y) {
