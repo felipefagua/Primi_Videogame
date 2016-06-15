@@ -29,13 +29,19 @@ public class MovementController : MonoBehaviour {
     [SerializeField]
     private KeyCode _attackKey;
 
+    [SerializeField] 
+    private KeyCode _jumpKey;
+
+    private JumpController _jumpController;
+    
     private void Start() {
         _myTransform = transform;
+        _jumpController = GetComponent<JumpController>();
     }
 
     private void Update () {
 		CheckInput ();
-		CheckPS4Input ();
+		//CheckPS4Input ();
 	}
 
 	void CheckPS4Input () {
@@ -75,12 +81,36 @@ public class MovementController : MonoBehaviour {
             movementVector += new Vector3(-1, 0);
         if (Input.GetKey(_moveRightKey))
             movementVector += new Vector3(1, 0);
+        if (Input.GetKey(_jumpKey))
+            TryToJump();
 
-		TryToMoveCharacter (movementVector);
-        
+        if (_jumpController.IsJumping) {
+            movementVector.y = _jumpController.JumpVector.y;
+            MoveCharacterDuringJump(movementVector);
+        }
+        else
+            TryToMoveCharacter(movementVector);
+
     }
 
-	private void TryToMoveCharacter (Vector3 movementVector) {
+    private void MoveCharacterDuringJump(Vector3 movementVector) {
+        Vector3 jumpStep = movementVector * _movementSpeed * Time.deltaTime;
+        _myTransform.position += jumpStep;
+        if (_jumpController.IsJumping && _jumpController.IsGoingUp &&
+            _myTransform.position.y < _jumpController.StartJumpPosition.y) {
+            Vector3 newPostion = _myTransform.position;
+            newPostion.y = _jumpController.StartJumpPosition.y;
+            _myTransform.position = newPostion;
+        } 
+            
+    }
+
+    private void TryToJump() {
+        if (!_jumpController.IsJumping)
+            _jumpController.StartJump();
+    }
+
+    private void TryToMoveCharacter (Vector3 movementVector) {
 		Vector3 step = movementVector.normalized * _movementSpeed * Time.deltaTime;
 		Vector3 candidatePosition = _myTransform.position + step;
 
