@@ -53,7 +53,8 @@ public class LevelManager : MonoBehaviour {
                 Transform actor1 = (Transform)actors[j];
                 Transform actor2 = (Transform)actors[j + 1];
 
-                if (actor1.position.y < actor2.position.y) {
+                if (actor1 != null && actor2 != null &&
+                    actor1.position.y < actor2.position.y) {
                     actors[j] = actor2;
                     actors[j + 1] = actor1;
                 }

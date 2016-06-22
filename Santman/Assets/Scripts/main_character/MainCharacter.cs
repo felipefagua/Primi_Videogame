@@ -8,7 +8,7 @@ public class MainCharacter : MonoBehaviour {
 
     private MovementController _movementController;
 
-    [SerializeField] 
+    [SerializeField]
     private float _healthPoints;
 
     [SerializeField]
@@ -26,11 +26,22 @@ public class MainCharacter : MonoBehaviour {
         get { return _isDead; }
     }
 
-    [SerializeField] 
+    [SerializeField]
     private bool _isOnDebugMode;
 
+    private AudioSource _audioSource;
+
+    [SerializeField]
+    private AudioClip _walkSound;
+
+    [SerializeField]
+    private AudioClip _hitSound;
+
+    [SerializeField]
+    private AudioClip _jumpSound;
+
     // Use this for initialization
-	void Start () {
+    void Start () {
         _myTransform = transform;
 
         GameUIManager.Instance.LivesCount = (int)_healthPoints;
@@ -39,15 +50,23 @@ public class MainCharacter : MonoBehaviour {
 	    OnDead = LevelManager.Instance.OnMainCharacterKilled;
         LevelManager.Instance.AddActor(_myTransform);
 
+        InitAudioSource();
 	    InitMovementController();
 	}
+
+    private void InitAudioSource() {
+        _audioSource = GetComponent<AudioSource>();
+    }
 
     private void InitMovementController() {
         _movementController = GetComponent<MovementController>();
         _movementController.AttackAction = Attack;
+        _movementController.StartMovingAction = PlayWalkingSound;
+        _movementController.StopMovingAction = StopWalkingSound;
+        _movementController.JumpAction = PlayJumpSound;
     }
 
-    // Update is called once per frame
+     // Update is called once per frame
 	void Update () {
 	    if (_isOnDebugMode)
 	        DebugAttackRange();
@@ -102,6 +121,36 @@ public class MainCharacter : MonoBehaviour {
         return enemiesPositions;
     }
 
+    private void PlayWalkingSound() {
+        if (!_audioSource.isPlaying ||
+            _audioSource.clip != _walkSound) {
+            PlayClip(_walkSound, true);
+        }
+    }
+
+    private void StopWalkingSound() {
+        if (_audioSource.isPlaying &&
+            _audioSource.clip == _walkSound) {
+            _audioSource.Stop();
+        }
+        
+    }
+
+    private void PlayJumpSound() {
+        PlayClip(_jumpSound, false);
+    }
+
+    private void PlayGetHitSound() {
+        PlayClip(_hitSound, false);
+    }
+
+    private void PlayClip(AudioClip audioClip, bool loop) {
+        _audioSource.Stop();
+        _audioSource.clip = audioClip;
+        _audioSource.loop = loop;
+        _audioSource.Play();
+    }
+
     private void Attack() {
         
         BaseEnemy enemy = GetNearestEnemy();
@@ -149,6 +198,7 @@ public class MainCharacter : MonoBehaviour {
     public void Hit(float attackDamage) {
         _healthPoints -= attackDamage;
         GetComponent<Animator>().SetTrigger("getHit");
+        PlayGetHitSound();
         if (_healthPoints <= 0) {
             _healthPoints = 0;
             Die();

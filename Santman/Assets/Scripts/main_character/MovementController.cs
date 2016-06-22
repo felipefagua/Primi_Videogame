@@ -5,6 +5,9 @@ using System.Collections;
 public class MovementController : MonoBehaviour {
 
     public Action AttackAction { get; set; }
+    public Action JumpAction { get; set; }
+    public Action StartMovingAction { get; set; }
+    public Action StopMovingAction { get; set; }
 
     private Transform _myTransform;
 
@@ -122,8 +125,11 @@ public class MovementController : MonoBehaviour {
     }
 
     private void TryToJump() {
-        if (!_jumpController.IsJumping)
+        if (!_jumpController.IsJumping) {
             _jumpController.StartJump();
+            if (JumpAction != null)
+                JumpAction();
+        }
     }
 
     private void TryToMoveCharacter (Vector3 movementVector) {
@@ -136,6 +142,10 @@ public class MovementController : MonoBehaviour {
 			_myTransform.position = candidatePosition;
 			if (movementVector.magnitude > 0) {
 				GetComponent<Animator>().SetBool("isWalking", true);
+
+                if (StartMovingAction != null)
+                    StartMovingAction();
+
 				if (movementVector.x < 0) {
 					Vector3 newScale = _myTransform.localScale;
 					newScale.x = Mathf.Abs(newScale.x) * -1;
@@ -146,10 +156,11 @@ public class MovementController : MonoBehaviour {
 					newScale.x = Mathf.Abs(newScale.x);
 					_myTransform.localScale = newScale;
 				}
-			}
-			else
-				GetComponent<Animator>().SetBool("isWalking", false);
-
+			} else {
+                GetComponent<Animator>().SetBool("isWalking", false);
+                if (StopMovingAction != null)
+                    StopMovingAction();
+            }
 		}		
 	}
 

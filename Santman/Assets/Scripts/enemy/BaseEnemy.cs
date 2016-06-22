@@ -92,6 +92,7 @@ public class BaseEnemy : MonoBehaviour {
 
             if (OnDead != null)
                 OnDead();
+            GetComponent<Animator>().SetBool("isDead", true);
             Destroy(gameObject, _dieTime);
         }
         
@@ -133,9 +134,11 @@ public class BaseEnemy : MonoBehaviour {
     }
 
     private void OnReachPlayer() {
-        _movementAIComponent.enabled = false;
-        Attack();
-        Invoke("OnAttackCoolDownEnd", _attackCoolDown);
+        if (!isDead) {
+            _movementAIComponent.enabled = false;
+            Attack();
+            Invoke("OnAttackCoolDownEnd", _attackCoolDown);
+        }
     }
 
     private void Attack() {
