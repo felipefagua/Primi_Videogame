@@ -42,8 +42,10 @@ public class LevelManager : MonoBehaviour {
     private void SetActorsLayer(int startLayer) {
         for (int i = 0; i < actors.Count; i++) {
             Transform spriteTransform = (Transform)actors[i];
-            SpriteRenderer sprite = spriteTransform.GetComponent<SpriteRenderer>();
-            sprite.sortingOrder = startLayer + i;
+            if (spriteTransform != null) {
+                SpriteRenderer sprite = spriteTransform.GetComponent<SpriteRenderer>();
+                sprite.sortingOrder = startLayer + i;
+            }
         }
     }
 

@@ -137,6 +137,7 @@ public class MainCharacter : MonoBehaviour {
     }
 
     private void PlayJumpSound() {
+        GetComponent<Animator>().SetTrigger("jump");
         PlayClip(_jumpSound, false);
     }
 

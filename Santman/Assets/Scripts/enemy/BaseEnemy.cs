@@ -39,7 +39,7 @@ public class BaseEnemy : MonoBehaviour {
 
     [SerializeField]
     private bool _isOnDebugMode;
-
+    
     public Action OnDead { get; set; }
 
     public float AttackRange {
@@ -74,11 +74,15 @@ public class BaseEnemy : MonoBehaviour {
     }
 
     internal void Hit(float attackDamage) {
-        _healthPoints -= attackDamage;
-        GetComponent<Animator>().SetTrigger("getHit");
-        if (_healthPoints <= 0) {
-            _healthPoints = 0;
-            Die();
+        if (!_isDead) {
+            _healthPoints -= attackDamage;
+            GetComponent<Animator>().SetTrigger("getHit");
+            GetComponent<AudioSource>().Play();
+            if (_healthPoints <= 0)
+            {
+                _healthPoints = 0;
+                Die();
+            }
         }
     }
 
